@@ -28,25 +28,39 @@ echo ""
 # Ask user for installation method
 echo "Choose installation method:"
 echo "  1) System-wide install to /usr/local/bin (recommended)"
-echo "  2) Cargo install (user-only, auto PATH setup)"
+echo "  2) User-only install with auto PATH setup"
 echo ""
 read -p "Enter choice (1 or 2): " choice
 
-if [ "$choice" = "2" ]; then
-    # Cargo install method
-    echo ""
-    echo "📦 Installing via cargo..."
-    cargo install ferret-rs
+# Install via cargo first
+echo ""
+echo "📦 Installing ferret-rs via cargo..."
+cargo install ferret-rs
+
+if [ $? -ne 0 ]; then
+    echo "❌ Cargo install failed!"
+    exit 1
+fi
+
+echo "✓ Installed ferret-rs to ~/.cargo/bin/fr"
+echo ""
+
+if [ "$choice" = "1" ]; then
+    # System-wide install: copy to /usr/local/bin
+    echo "📦 Installing to /usr/local/bin..."
     
-    if [ $? -ne 0 ]; then
-        echo "❌ Cargo install failed!"
-        exit 1
+    if [ -w /usr/local/bin ]; then
+        cp "$HOME/.cargo/bin/fr" /usr/local/bin/
+        echo "✓ Installed to /usr/local/bin/fr"
+    else
+        echo "Need sudo privileges to install to /usr/local/bin"
+        sudo cp "$HOME/.cargo/bin/fr" /usr/local/bin/
+        echo "✓ Installed to /usr/local/bin/fr"
     fi
-    
-    echo "✓ Installed ferret-rs"
-    echo ""
-    
-    # Setup PATH
+else
+    # User-only install: setup PATH
+else
+    # User-only install: setup PATH
     CARGO_BIN="$HOME/.cargo/bin"
     
     # Check if already in PATH
@@ -79,30 +93,6 @@ if [ "$choice" = "2" ]; then
         
         # Export for current session
         export PATH="$HOME/.cargo/bin:$PATH"
-    fi
-else
-    # System-wide install method
-    echo ""
-    echo "🔨 Building Ferret..."
-    cargo build --release
-    
-    if [ $? -eq 0 ]; then
-        echo "✓ Build successful!"
-        echo ""
-    else
-        echo "❌ Build failed!"
-        exit 1
-    fi
-    
-    echo "📦 Installing to /usr/local/bin..."
-    
-    if [ -w /usr/local/bin ]; then
-        cp target/release/fr /usr/local/bin/
-        echo "✓ Installed to /usr/local/bin/fr"
-    else
-        echo "Need sudo privileges to install to /usr/local/bin"
-        sudo cp target/release/fr /usr/local/bin/
-        echo "✓ Installed to /usr/local/bin/fr"
     fi
 fi
 
