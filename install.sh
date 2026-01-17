@@ -30,7 +30,7 @@ echo "Choose installation method:"
 echo "  1) System-wide install to /usr/local/bin (recommended)"
 echo "  2) User-only install with auto PATH setup"
 echo ""
-read -p "Enter choice (1 or 2): " choice
+read -p "Enter choice (1 or 2): " choice < /dev/tty
 
 # Install via cargo first
 echo ""
