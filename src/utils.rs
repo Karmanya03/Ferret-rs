@@ -151,15 +151,22 @@ pub fn show_stats(path: &str, recursive: bool, hidden: bool, verbose: bool) -> R
     let term_width = terminal_size()
         .map(|(Width(w), _)| w as usize)
         .unwrap_or(80);
-    
+
     // Reserve 20 chars for size column and spacing
     let path_width = term_width.saturating_sub(20).max(40);
-    
+
     println!("  {:<width$} {:>15}", "File", "Size", width = path_width);
-    println!("  {}", "─".repeat(term_width.saturating_sub(2)).bright_black());
+    println!(
+        "  {}",
+        "─".repeat(term_width.saturating_sub(2)).bright_black()
+    );
 
     for (path, size) in file_sizes.iter().take(10) {
-        let display_path = path.strip_prefix(source_path).unwrap_or(path).display().to_string();
+        let display_path = path
+            .strip_prefix(source_path)
+            .unwrap_or(path)
+            .display()
+            .to_string();
         println!(
             "  {:<width$} {:>15}",
             display_path,
