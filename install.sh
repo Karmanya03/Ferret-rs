@@ -59,8 +59,6 @@ if [ "$choice" = "1" ]; then
     fi
 else
     # User-only install: setup PATH
-else
-    # User-only install: setup PATH
     CARGO_BIN="$HOME/.cargo/bin"
     
     # Check if already in PATH
