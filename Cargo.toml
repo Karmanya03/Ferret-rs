@@ -1,0 +1,49 @@
+[package]
+name = "ferret-cli"
+version = "0.0.1"
+edition = "2024"
+authors = ["Ferret Contributors"]
+description = "Ferret - A blazingly fast file finder and organizer for Linux/Unix systems with netcat-style combined flags"
+license = "MIT"
+repository = "https://github.com/Karmanya03/Ferret"
+homepage = "https://github.com/Karmanya03/Ferret"
+documentation = "https://github.com/Karmanya03/Ferret#readme"
+readme = "README.md"
+keywords = ["cli", "file-finder", "file-organizer", "search", "utility"]
+categories = ["command-line-utilities", "filesystem"]
+exclude = [
+    ".github/",
+    "test_output/",
+    "organized/",
+    "*.log",
+]
+
+[[bin]]
+name = "fr"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive", "cargo"] }
+walkdir = "2.5"
+colored = "3.0"
+regex = "1.11"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+humansize = "2.1"
+rayon = "1.10"
+indicatif = "0.17"
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+
+[profile.test]
+opt-level = 1

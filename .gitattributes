@@ -1,0 +1,4 @@
+*.rs linguist-language=Rust
+*.md linguist-documentation
+*.yml linguist-language=YAML
+*.toml linguist-language=TOML

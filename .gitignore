@@ -1,0 +1,85 @@
+# Rust build artifacts
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+.vim/
+*.sublime-*
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Test and temporary outputs
+/test_output/
+/organized/
+*.tmp
+*.temp
+*.log
+*.bak
+
+# Security - Never commit these!
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+secrets/
+*.secret
+config/local.*
+config/production.*
+*.credentials
+
+# Build and distribution
+/dist/
+/build/
+*.exe
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+
+# Documentation builds
+/docs/_build/
+/site/
+
+# Package manager
+node_modules/
+.npm/
+.yarn/
+
+# Coverage and profiling
+*.profdata
+*.profraw
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# Benchmark results
+bench_results/
+
+# Local development
+.local/
+.cache/
+tmp/
+temp/
