@@ -32,7 +32,7 @@ This guide explains how to publish Ferret to various package managers so users c
 
 **Notes:**
 - Package name: `ferret`
-- Version: 0.1.0
+- Version: 0.0.1
 - The binary is called `fr` (configured in Cargo.toml)
 - Once published, you can't unpublish (only yank versions)
 
@@ -48,17 +48,17 @@ The PKGBUILD file is located in `aur/PKGBUILD`.
 
 1. **Create a GitHub release first**
    - Go to: https://github.com/Karmanya03/Ferret/releases/new
-   - Tag: `v0.1.0`
+   - Tag: `v0.0.1`
    - Upload the release
    - Copy the tar.gz URL
 
 2. **Update the PKGBUILD sha256sum**
    ```bash
    # Download the release tarball
-   wget https://github.com/Karmanya03/Ferret/archive/v0.1.0.tar.gz
+   wget https://github.com/Karmanya03/Ferret/archive/v0.0.1.tar.gz
    
    # Generate sha256
-   sha256sum v0.1.0.tar.gz
+   sha256sum v0.0.1.tar.gz
    
    # Update sha256sums=('...') in PKGBUILD with the output
    ```
@@ -81,7 +81,7 @@ The PKGBUILD file is located in `aur/PKGBUILD`.
    
    # Commit and push
    git add PKGBUILD .SRCINFO
-   git commit -m "Initial commit: ferret 0.1.0"
+   git commit -m "Initial commit: ferret 0.0.1"
    git push
    ```
 
@@ -108,16 +108,16 @@ The formula is located in `homebrew/ferret.rb`.
 ### Steps to Publish:
 
 1. **Create a GitHub release** (if not done already)
-   - Tag: `v0.1.0`
+   - Tag: `v0.0.1`
    - Upload the release
 
 2. **Update the formula sha256**
    ```bash
    # Download the release tarball
-   wget https://github.com/Karmanya03/Ferret/archive/refs/tags/v0.1.0.tar.gz
+   wget https://github.com/Karmanya03/Ferret/archive/refs/tags/v0.0.1.tar.gz
    
    # Generate sha256
-   shasum -a 256 v0.1.0.tar.gz
+   shasum -a 256 v0.0.1.tar.gz
    
    # Update sha256 in homebrew/ferret.rb
    ```
@@ -187,7 +187,7 @@ The formula is located in `homebrew/ferret.rb`.
 
 4. **Users install via:**
    ```bash
-   sudo dpkg -i ferret_0.1.0_amd64.deb
+   sudo dpkg -i ferret_0.0.1_amd64.deb
    ```
 
 ---
@@ -202,7 +202,7 @@ When releasing a new version:
 - [ ] Update CHANGELOG.md
 - [ ] Test build locally: `cargo build --release`
 - [ ] Run tests: `cargo test`
-- [ ] Create GitHub release with tag (e.g., `v0.1.0`)
+- [ ] Create GitHub release with tag (e.g., `v0.0.1`)
 - [ ] Update sha256sums in PKGBUILD and Homebrew formula
 - [ ] Publish to crates.io: `cargo publish`
 - [ ] Update AUR repository
@@ -214,8 +214,8 @@ When releasing a new version:
 
 1. **Create GitHub Release:**
    ```bash
-   git tag v0.1.0
-   git push origin v0.1.0
+   git tag v0.0.1
+   git push origin v0.0.1
    ```
    Then create release on GitHub
 
