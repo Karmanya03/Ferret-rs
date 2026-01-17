@@ -51,7 +51,7 @@ paru -S ferret-rs
 brew tap Karmanya03/ferret
 
 # Install
-brew install ferret
+brew install ferret-rs
 ```
 
 #### **From Source (The Hard Way)**
@@ -91,7 +91,7 @@ paru -Syu ferret-rs
 #### **macOS (Homebrew)**
 ```bash
 brew update
-brew upgrade ferret
+brew upgrade ferret-rs
 ```
 
 #### **From Source**
