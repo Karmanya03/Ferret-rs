@@ -120,6 +120,12 @@ fr --version      # Should show: fr 0.1.0
 
 Already have Ferret installed? Here's how to upgrade to the latest version:
 
+#### **🚀 One-Command Upgrade (Recommended)**
+```bash
+curl -fsSL https://raw.githubusercontent.com/Karmanya03/Ferret/main/install.sh | bash
+```
+*Automatically detects if you have cargo/brew and upgrades to the latest version*
+
 #### **Via Cargo**
 ```bash
 cargo install ferret-rs --force
