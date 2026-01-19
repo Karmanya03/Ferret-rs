@@ -1251,16 +1251,21 @@ MIT License - Do whatever you want with it. Credit appreciated but not required.
 
 Found a bug? Have an idea? Cool. Open an issue or send a PR. No strict rules, just don't be a jerk and write decent commit messages.
 
-## What's Next
+## 📝 What's Next (Roadmap)
 
-Maybe. Probably. No promises.
+Planning for future releases:
+- **Trash/recycle bin support** - Safe file deletion with recovery
+- **Batch file operations in TUI** - Multi-select and bulk actions
+- **More search operators** - Advanced filtering and queries
+- **More Advanced Regex options** - Enhanced pattern matching capabilities
+- **Plugin system** - Extensible architecture for custom tools
+- **Cloud storage integration** - Support for S3, Google Drive, Dropbox, etc.
 
-- Duplicate file detection
-- Content search (grep integration)
-- Interactive TUI mode
-- Custom organization rules
-- Config file support
-- Cloud storage integration
+---
+
+## 🙏 Contributors
+
+Thanks to everyone who uses Ferret and provides feedback!
 
 ---
 
