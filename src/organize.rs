@@ -6,6 +6,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use walkdir::{DirEntry, WalkDir};
 
+use crate::config::FerretConfig;
+
 // Configuration for the organize command
 pub struct OrganizeCommand {
     pub path: String,
@@ -186,8 +188,16 @@ impl OrganizeCommand {
         Ok(())
     }
     // Figure out what category a file belongs to based on extension
-
     fn categorize_file(&self, path: &Path) -> String {
+        // Try to load config and use custom mappings
+        if let Ok(config) = FerretConfig::load()
+            && let Some(ext) = path.extension().and_then(|s| s.to_str())
+            && let Some(category) = config.get_category(ext)
+        {
+            return category;
+        }
+
+        // Fallback to default categorization if config not available or no match
         let extension = path
             .extension()
             .and_then(|s| s.to_str())

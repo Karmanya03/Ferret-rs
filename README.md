@@ -113,7 +113,7 @@ source ~/.bashrc
 **Verify it worked:**
 ```bash
 which fr          # Should show: /home/username/.cargo/bin/fr
-fr --version      # Should show: fr 0.1.1
+fr --version      # Should show: fr 0.2.0
 ```
 
 ### Upgrading
@@ -272,6 +272,10 @@ fr find "*" -t symlink
 | `fr find PATTERN` | Find files matching pattern |
 | `fr organize PATH` | Clean up the mess |
 | `fr stats PATH` | See what's taking up space |
+| `fr dupes PATH` | Find duplicate files (waste detector) |
+| `fr grep PATTERN` | Search inside files (fast grep) |
+| `fr tui` | Interactive file browser (fancy) |
+| `fr config` | Manage your config file |
 | `fr ls PATH` | List directory contents (like ls) |
 | `fr suid` | Find SUID binaries (pentesting) |
 | `fr sgid` | Find SGID binaries (pentesting) |
@@ -379,6 +383,172 @@ fr organize -m size
 | `-r` | Recursive |
 | `-H` | Include hidden |
 | `-v` | Verbose |
+
+</td>
+<td width="50%" valign="top">
+
+### Duplicate Finder Command
+
+Find duplicate files because your Downloads folder is a disaster zone.
+
+```bash
+# Find duplicates in current directory
+fr dupes
+
+# Search specific path
+fr dupes ~/Downloads
+
+# Recursive search (go deep)
+fr dupes -r
+
+# Check big files only (skip the tiny ones)
+fr dupes --min-size 1M
+
+# Ignore really large files (skip videos)
+fr dupes --max-size 100M
+
+# Combine flags like a pro
+fr dupes ~/Downloads -r --min-size 1M -v
+```
+
+**How It Works**
+- First filters by file size (fast)
+- Then uses SHA256 hashing (accurate)
+- Parallel processing (stupid fast)
+- Shows you where your duplicates are hiding
+
+**Dupes Flags**
+
+| Flag | What |
+|------|------|
+| `-r` | Recursive search |
+| `--min-size SIZE` | Minimum file size (K/M/G) |
+| `--max-size SIZE` | Maximum file size |
+| `-H` | Include hidden files |
+| `-v` | Verbose output |
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### Grep Command
+
+Search inside files like you mean it. Fast. Parallel. Powerful.
+
+```bash
+# Search for pattern in current dir
+fr grep "TODO"
+
+# Search specific path
+fr grep "password" ~/Documents
+
+# Recursive search (the usual)
+fr grep "error" -r
+
+# Case insensitive
+fr grep "warning" -i
+
+# Use regex (for the fancy folks)
+fr grep "bug-\d+" -R
+
+# Only show filenames
+fr grep "FIXME" -l
+
+# Show line numbers
+fr grep "hack" -n
+
+# Limit depth
+fr grep "secret" -d 3
+
+# All the flags at once
+fr grep "config" ~/code -riln
+```
+
+**Grep Flags**
+
+| Flag | What |
+|------|------|
+| `-r` | Recursive search |
+| `-i` | Ignore case |
+| `-R` | Enable regex |
+| `-l` | Files only (no content) |
+| `-n` | Show line numbers |
+| `-d DEPTH` | Max depth |
+| `-H` | Include hidden files |
+| `-v` | Verbose mode |
+
+</td>
+<td width="50%" valign="top">
+
+### TUI Mode
+
+Interactive file browser. Because sometimes you just want to click around (with your keyboard).
+
+```bash
+# Launch the TUI
+fr tui
+
+# Start in specific directory
+fr tui ~/Downloads
+```
+
+**TUI Controls**
+- `↑/k` - Move up
+- `↓/j` - Move down  
+- `Enter` - Open directory
+- `h` - Toggle hidden files
+- `q` - Quit
+
+**Why Use TUI?**
+- Fast navigation
+- See everything at once
+- Vim keybindings (for the cultured)
+- No mouse required
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### Config Command
+
+Customize file organization. Tell Ferret how YOU want things organized.
+
+```bash
+# Initialize config file
+fr config init
+
+# Show current config
+fr config show
+
+# Get config path
+fr config path
+```
+
+**Config File Location**
+- Linux/Mac: `~/.config/ferret/config.toml`
+- Windows: `%APPDATA%\ferret\config.toml`
+
+**Example Config**
+
+```toml
+[organization]
+[organization.file_types]
+code = [".rs", ".py", ".js", ".go"]
+docs = [".pdf", ".docx", ".txt"]
+music = [".mp3", ".flac", ".wav"]
+
+[performance]
+max_file_size_mb = 1000  # Max file size for dupes
+thread_count = 8         # Parallel processing threads
+```
+
+**Config Features**
+- Custom file type categories
+- Performance tuning
+- Organization preferences
+- Persistent settings
 
 </td>
 <td width="50%" valign="top">

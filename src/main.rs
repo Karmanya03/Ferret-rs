@@ -1,10 +1,15 @@
 use anyhow::Result;
 use clap::{Parser, Subcommand};
+use colored::*;
 
 // Import our custom modules
+mod config;
+mod duplicates;
+mod grep;
 mod organize;
 mod pentest;
 mod search;
+mod tui;
 mod utils;
 
 use organize::OrganizeCommand;
@@ -14,7 +19,7 @@ use search::SearchCommand;
 #[derive(Parser)]
 #[command(name = "fr")]
 #[command(author = "Ferret")]
-#[command(version = "0.1.1")]
+#[command(version = "0.2.0")]
 #[command(about = "Ferret - Fast file finder, organizer, and pentesting tool for Linux/Unix systems", long_about = None)]
 struct Cli {
     #[command(subcommand)]
@@ -315,6 +320,88 @@ enum Commands {
         #[arg(short = 'e', long)]
         explain_perms: bool,
     },
+
+    /// 🔥 Find duplicate files (size and hash based detection)
+    Dupes {
+        /// Directory to search (default: current directory)
+        #[arg(default_value = ".")]
+        path: String,
+
+        /// Minimum file size to consider (e.g., 1M, 100K)
+        #[arg(long)]
+        min_size: Option<String>,
+
+        /// Search recursively
+        #[arg(short = 'r', long)]
+        recursive: bool,
+
+        /// Verbose output
+        #[arg(short = 'v', long)]
+        verbose: bool,
+
+        /// Save report to file
+        #[arg(short = 'o', long)]
+        output: Option<String>,
+    },
+
+    /// 🔍 Search file contents (grep-like functionality)
+    Grep {
+        /// Pattern to search for
+        pattern: String,
+
+        /// Directory to search (default: current directory)
+        #[arg(default_value = ".")]
+        path: String,
+
+        /// Use regex pattern
+        #[arg(short = 'r', long)]
+        regex: bool,
+
+        /// Case-insensitive search
+        #[arg(short = 'i', long)]
+        ignore_case: bool,
+
+        /// Search recursively
+        #[arg(short = 'R', long, default_value = "true")]
+        recursive: bool,
+
+        /// Filter by file pattern (e.g., *.rs, *.txt)
+        #[arg(short = 'g', long)]
+        glob: Option<String>,
+
+        /// Number of context lines to show
+        #[arg(short = 'C', long, default_value = "0")]
+        context: usize,
+
+        /// Verbose output
+        #[arg(short = 'v', long)]
+        verbose: bool,
+    },
+
+    /// 🎨 Interactive TUI file browser
+    Tui {
+        /// Starting directory (default: current directory)
+        #[arg(default_value = ".")]
+        path: String,
+    },
+
+    /// ⚙️ Config management
+    Config {
+        #[command(subcommand)]
+        action: ConfigAction,
+    },
+}
+
+#[derive(Subcommand)]
+enum ConfigAction {
+    /// Initialize config file with defaults
+    Init,
+
+    /// Show current config
+    Show,
+
+    /// Show config file path
+    Path,
 }
 
 fn main() -> Result<()> {
@@ -506,6 +593,62 @@ fn main() -> Result<()> {
         } => {
             utils::list_files(&path, all, long, recursive, human, explain_perms)?;
         }
+
+        Commands::Dupes {
+            path,
+            min_size,
+            recursive,
+            verbose,
+            output,
+        } => {
+            let min_bytes = min_size.as_ref().and_then(|s| search::parse_size(s).ok());
+            duplicates::find_duplicates(&path, min_bytes, recursive, verbose, output)?;
+        }
+
+        Commands::Grep {
+            pattern,
+            path,
+            regex,
+            ignore_case,
+            recursive,
+            glob,
+            context: _,
+            verbose,
+        } => {
+            grep::grep_search(grep::GrepOptions {
+                pattern,
+                path,
+                is_regex: regex,
+                ignore_case,
+                recursive,
+                file_pattern: glob,
+                verbose,
+            })?;
+        }
+
+        Commands::Tui { path } => {
+            tui::run_tui(&path)?;
+        }
+
+        Commands::Config { action } => match action {
+            ConfigAction::Init => {
+                let path = config::FerretConfig::init()?;
+                println!(
+                    "✓ Config file created at: {}",
+                    path.display().to_string().cyan()
+                );
+                println!("  Edit this file to customize file type mappings and settings.");
+            }
+            ConfigAction::Show => {
+                let config = config::FerretConfig::load()?;
+                let toml = toml::to_string_pretty(&config)?;
+                println!("{}", toml);
+            }
+            ConfigAction::Path => {
+                let path = config::FerretConfig::config_path()?;
+                println!("{}", path.display());
+            }
+        },
     }
 
     Ok(())

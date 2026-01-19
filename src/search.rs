@@ -365,7 +365,7 @@ fn glob_to_regex(pattern: &str) -> String {
     regex
 }
 
-fn parse_size(size_str: &str) -> Result<u64> {
+pub fn parse_size(size_str: &str) -> Result<u64> {
     let size_str = size_str.trim().to_uppercase();
     let (num_str, multiplier) = if let Some(stripped) = size_str.strip_suffix('K') {
         (stripped, 1024u64)

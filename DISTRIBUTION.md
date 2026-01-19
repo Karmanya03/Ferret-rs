@@ -32,7 +32,7 @@ This guide explains how to publish Ferret to various package managers so users c
 
 **Notes:**
 - Package name: `ferret-rs`
-- Version: 0.1.1
+- Version: 0.2.0
 - The binary is called `fr` (configured in Cargo.toml)
 - Once published, you can't unpublish (only yank versions)
 
@@ -48,17 +48,17 @@ The PKGBUILD file is located in `aur/PKGBUILD`.
 
 1. **Create a GitHub release first**
    - Go to: https://github.com/Karmanya03/Ferret/releases/new
-   - Tag: `v0.1.1`
+   - Tag: `v0.2.0`
    - Upload the release
    - Copy the tar.gz URL
 
 2. **Update the PKGBUILD sha256sum**
    ```bash
    # Download the release tarball
-   wget https://github.com/Karmanya03/Ferret/archive/v0.1.1.tar.gz
+   wget https://github.com/Karmanya03/Ferret/archive/v0.2.0.tar.gz
    
    # Generate sha256
-   sha256sum v0.1.1.tar.gz
+   sha256sum v0.2.0.tar.gz
    
    # Update sha256sums=('...') in PKGBUILD with the output
    ```
@@ -81,7 +81,7 @@ The PKGBUILD file is located in `aur/PKGBUILD`.
    
    # Commit and push
    git add PKGBUILD .SRCINFO
-   git commit -m "Update to ferret-rs 0.1.1"
+   git commit -m "Update to ferret-rs 0.2.0"
    git push
    ```
 
@@ -114,10 +114,10 @@ The formula is located in `homebrew/ferret.rb`.
 2. **Update the formula sha256**
    ```bash
    # Download the release tarball
-   wget https://github.com/Karmanya03/Ferret/archive/refs/tags/v0.1.1.tar.gz
+   wget https://github.com/Karmanya03/Ferret/archive/refs/tags/v0.2.0.tar.gz
    
    # Generate sha256
-   shasum -a 256 v0.1.1.tar.gz
+   shasum -a 256 v0.2.0.tar.gz
    
    # Update sha256 in homebrew/ferret.rb
    ```
@@ -187,7 +187,7 @@ The formula is located in `homebrew/ferret.rb`.
 
 4. **Users install via:**
    ```bash
-   sudo dpkg -i ferret-rs_0.1.1_amd64.deb
+   sudo dpkg -i ferret-rs_0.2.0_amd64.deb
    ```
 
 ---

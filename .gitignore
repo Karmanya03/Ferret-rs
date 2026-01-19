@@ -49,6 +49,10 @@ config/local.*
 config/production.*
 *.credentials
 
+# Ferret config files (may contain sensitive paths)
+**/ferret/config.toml
+.ferret/
+
 # Build and distribution
 /dist/
 /build/
