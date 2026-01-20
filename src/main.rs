@@ -9,7 +9,6 @@ mod grep;
 mod organize;
 mod pentest;
 mod search;
-mod tui;
 mod utils;
 
 use organize::OrganizeCommand;
@@ -378,13 +377,6 @@ enum Commands {
         verbose: bool,
     },
 
-    /// 🎨 Interactive TUI file browser
-    Tui {
-        /// Starting directory (default: current directory)
-        #[arg(default_value = ".")]
-        path: String,
-    },
-
     /// ⚙️ Config management
     Config {
         #[command(subcommand)]
@@ -624,10 +616,6 @@ fn main() -> Result<()> {
                 file_pattern: glob,
                 verbose,
             })?;
-        }
-
-        Commands::Tui { path } => {
-            tui::run_tui(&path)?;
         }
 
         Commands::Config { action } => match action {

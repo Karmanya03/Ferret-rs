@@ -72,28 +72,7 @@ fr grep "error" logs/ -g "*.log"     # Only in .log files
 - Optimized regex compilation
 - Streams large files without loading into memory
 
-### 4. Interactive TUI Mode 🎨
-Browse files like it's 1995 (but better)!
-
-- **File browser** - Navigate directories interactively
-- **Vim-like keybindings** - j/k for navigation
-- **Show/hide hidden files** - Toggle with 'h'
-- **Real-time display** - File sizes and types shown live
-
-**Commands:**
-```bash
-fr tui              # Launch TUI in current directory
-fr tui /var/log     # Start in specific directory
-```
-
-**Keybindings:**
-- `↑/↓` or `j/k` - Navigate up/down
-- `Enter` or `l` - Open directory
-- `h` - Toggle hidden files
-- `r` - Refresh
-- `q` or `Esc` - Quit
-
-### 5. Enhanced Organization 📁
+### 4. Enhanced Organization 📁
 Organization now respects your config file!
 
 - Uses custom category mappings from config
@@ -115,14 +94,11 @@ Organization now respects your config file!
   - `config.rs` - Configuration management
   - `duplicates.rs` - Duplicate file detection
   - `grep.rs` - Content search
-  - `tui.rs` - Terminal UI
 
 ## 📦 Dependencies Added
 
 - `toml 0.8` - Config file parsing
 - `sha2 0.10` - Fast SHA256 hashing
-- `ratatui 0.28` - Modern terminal UI
-- `crossterm 0.28` - Cross-platform terminal
 - `dirs 5.0` - Config directory detection
 
 ## 🔒 Security & Privacy
@@ -146,7 +122,6 @@ Organization now respects your config file!
 
 Planning for future releases:
 - Trash/recycle bin support
-- Batch file operations in TUI
 - More search operators
 - More Advanced Regex options
 - Plugin system

@@ -38,8 +38,6 @@ serde_json = "1.0"
 terminal_size = "0.4"
 toml = "0.9"
 sha2 = "0.10"
-ratatui = "0.30"
-crossterm = "0.29"
 dirs = "6.0"
 
 [profile.release]

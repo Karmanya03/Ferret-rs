@@ -274,7 +274,6 @@ fr find "*" -t symlink
 | `fr stats PATH` | See what's taking up space |
 | `fr dupes PATH` | Find duplicate files (waste detector) |
 | `fr grep PATTERN` | Search inside files (fast grep) |
-| `fr tui` | Interactive file browser (fancy) |
 | `fr config` | Manage your config file |
 | `fr ls PATH` | List directory contents (like ls) |
 | `fr suid` | Find SUID binaries (pentesting) |
@@ -479,36 +478,6 @@ fr grep "config" ~/code -riln
 | `-v` | Verbose mode |
 
 </td>
-<td width="50%" valign="top">
-
-### TUI Mode
-
-Interactive file browser. Because sometimes you just want to click around (with your keyboard).
-
-```bash
-# Launch the TUI
-fr tui
-
-# Start in specific directory
-fr tui ~/Downloads
-```
-
-**TUI Controls**
-- `↑/k` - Move up
-- `↓/j` - Move down  
-- `Enter` - Open directory
-- `h` - Toggle hidden files
-- `q` - Quit
-
-**Why Use TUI?**
-- Fast navigation
-- See everything at once
-- Vim keybindings (for the cultured)
-- No mouse required
-
-</td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### Config Command
@@ -1255,7 +1224,6 @@ Found a bug? Have an idea? Cool. Open an issue or send a PR. No strict rules, ju
 
 Planning for future releases:
 - **Trash/recycle bin support** - Safe file deletion with recovery
-- **Batch file operations in TUI** - Multi-select and bulk actions
 - **More search operators** - Advanced filtering and queries
 - **More Advanced Regex options** - Enhanced pattern matching capabilities
 - **Plugin system** - Extensible architecture for custom tools

@@ -36,14 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - File pattern filtering
 - Flags: `-r` (regex), `-i` (ignore case), `-R` (recursive), `-g` (glob pattern), `-v` (verbose)
 
-#### Interactive TUI Mode
-- **`fr tui`** - Launch interactive file browser
-- Vim-like navigation (j/k for up/down)
-- Show/hide hidden files with 'h'
-- Real-time file size display
-- Directory traversal with Enter/l
-- Refresh with 'r', quit with q/Esc
-
 #### Enhanced Organization
 - Now uses custom category mappings from config file
 - Fallback to sensible defaults
@@ -69,15 +61,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 📦 New Dependencies
 - `toml 0.8` - Configuration file parsing
 - `sha2 0.10` - Fast SHA256 hashing algorithm
-- `ratatui 0.28` - Modern terminal UI framework
-- `crossterm 0.28` - Cross-platform terminal handling
 - `dirs 5.0` - Standard config directory detection
 
 ### 🏗️ Architecture Changes
 - Added `src/config.rs` - Configuration management module
 - Added `src/duplicates.rs` - Duplicate detection with hashing
 - Added `src/grep.rs` - Content search implementation
-- Added `src/tui.rs` - Interactive terminal UI
 - Enhanced `src/organize.rs` - Now config-aware
 
 ### 🐛 Bug Fixes
