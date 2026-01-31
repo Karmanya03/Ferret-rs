@@ -113,7 +113,7 @@ source ~/.bashrc
 **Verify it worked:**
 ```bash
 which fr          # Should show: /home/username/.cargo/bin/fr
-fr --version      # Should show: fr 0.2.0
+fr --version      # Should show: fr 0.2.1
 ```
 
 ### Upgrading

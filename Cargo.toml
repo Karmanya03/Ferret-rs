@@ -1,6 +1,6 @@
 [package]
 name = "ferret-rs"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
 authors = ["Karmanya03 <karmanya03@proton.me>"]
 description = "A blazingly fast file finder, organizer, and pentesting tool for Linux/Unix systems with netcat-style combined flags"
